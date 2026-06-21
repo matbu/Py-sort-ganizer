@@ -59,7 +59,7 @@ def sort_file(path, working_dir, type_mime=None, notree=False, depht=3):
     If notree option specified, all the file will be put at the root of the
     working directory.
 
-    Depht parameter manage the creation of the destionation path:
+    Depth parameter manage the creation of the destionation path:
       0 is equivalent as no tree: all files will be written in the working directory
       1 is year level: all files will be sorted by years
       2 is month level: all files will be sorted by years and months
@@ -125,12 +125,18 @@ if __name__ == '__main__':
                         help="Destination path of the sorted files",
                         required=True)
     parser.add_argument("-dp",
-                        "--depht",
-                        help=("Depht of the tree, 0 is no tree, 1 is year level, "
+                        "--depth",
+                        dest="depht",
+                        metavar="DEPTH",
+                        help=("Depth of the tree, 0 is no tree, 1 is year level, "
                               "2 is year/month, 3 is year/month/day (default)"),
                         required=False,
                         type=int,
                         default=3)
+    parser.add_argument("--depht",
+                        dest="depht",
+                        help=argparse.SUPPRESS,
+                        type=int)
     parser.add_argument("-e",
                         "--extension",
                         help="Select mime type of file",
